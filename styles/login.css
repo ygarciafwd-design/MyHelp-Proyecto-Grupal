@@ -1,0 +1,21 @@
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+.card {
+  border: none;
+}
+
+input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 225, 255, 0.25);
+}
+
+.btn-info {
+  background: linear-gradient(90deg, #00e1ff, #00bcd4);
+  border: none;
+  color: black;
+}
+
+.btn-info:hover {
+  background: linear-gradient(90deg, #00bcd4, #00e1ff);
+}

@@ -1,0 +1,38 @@
+/* Page specific styles for Becas.css */
+
+.transition-hover {
+    transition: var(--transition);
+}
+
+.transition-hover:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.border-accent {
+    border-color: var(--accent-color) !important;
+}
+
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.border-white-10 {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.form-control {
+    background: var(--input-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: white !important;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    background: var(--input-focus);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.2);
+    outline: none;
+}

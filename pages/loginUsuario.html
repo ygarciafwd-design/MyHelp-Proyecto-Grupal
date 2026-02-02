@@ -1,33 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro de usuarios</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS propio -->
+    <link rel="stylesheet" href="../css/login.css">
 </head>
-<body>
-    <h1>SOY EL INICIO DE SECCION DE USUARIOS</h1>
 
-    <p>Nombre Completo</p>
-    <input type="text" id="nombreUsuario">  
-    <p>Correo Electronico</p>
-    <input type="text" id="usuarioCorreo">
-    <p>Password</p>
-    <input type="text" id="usuarioPassword">
-    <p>Guardar</p>
-    <button id="usuarioBtnGuardar">Guardar</button>
+<body class="bg-dark text-light d-flex flex-column min-vh-100">
 
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow">
+        <div class="container">
+            <span class="navbar-brand fw-bold text-info">MiApp</span>
 
-    <a href="inicioSeccion.html">INCIO SECCION</a>
-    
-    <!--LO DEMAS VA EN EL REGISTRO-->
+            <!-- Botón hamburguesa -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <!-- Menú -->
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">← Volver al Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- CONTENIDO -->
+    <main class="container flex-grow-1 d-flex justify-content-center align-items-center">
+        <div class="card bg-black text-light p-4 shadow-lg rounded-4" style="width: 22rem;">
+            <h3 class="text-center mb-4">Registro de usuarios</h3>
 
+            <div class="mb-3">
+                <label class="form-label">Nombre completo</label>
+                <input type="text" class="form-control" id="nombreUsuario">
+            </div>
 
+            <div class="mb-3">
+                <label class="form-label">Correo electrónico</label>
+                <input type="text" class="form-control" id="usuarioCorreo">
+            </div>
 
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="usuarioPassword">
+            </div>
 
+            <button id="usuarioBtnGuardar" class="btn btn-info w-100 fw-bold">
+                Guardar
+            </button>
 
-<script src="../js/usuariLogin.js"></script>
+            <a href="inicioSeccion.html" class="btn btn-outline-light w-100 mt-3">
+                Ya tengo cuenta
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-center text-secondary py-3">
+        <p class="mb-0">© 2026 MiApp - Todos los derechos reservados</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Tu JS -->
+    <script src="../js/usuariLogin.js"></script>
 </body>
+
 </html>
