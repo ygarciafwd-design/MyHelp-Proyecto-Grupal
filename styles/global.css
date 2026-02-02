@@ -51,6 +51,33 @@ body {
     filter: brightness(1.1);
 }
 
+.btn-blue-glass {
+    background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-blue-glass:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 210, 255, 0.3);
+    filter: brightness(1.1);
+}
+
+.navbar-logo {
+    height: 95px !important;
+    width: auto;
+    transition: var(--transition);
+}
+
+.navbar-logo:hover {
+    transform: scale(1.05);
+}
+
 .navbar-glass {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(10px);

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
-
+    <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,68 +8,60 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- CSS propio -->
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../Styles/global.css">
+    <link rel="stylesheet" href="../Styles/login.css">
 </head>
 
-<body class="bg-dark text-light d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow">
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top">
         <div class="container">
-            <span class="navbar-brand fw-bold text-info">MiApp</span>
-
-            <!-- Botón hamburguesa (móvil) -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Menú -->
-            <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto gap-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html">← Volver al Home</a>
-                    </li>
-                </ul>
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="home.html">
+                <img src="../img/logo nuevo.png" alt="MyHelp Logo" class="navbar-logo me-2">
+                MyHelp
+            </a>
+            <div class="ms-auto">
+                <a href="home.html" class="btn btn-outline-light btn-sm">Volver al Inicio</a>
             </div>
         </div>
     </nav>
 
-    <!-- CONTENIDO -->
     <main class="container flex-grow-1 d-flex justify-content-center align-items-center">
-        <div class="card bg-black text-light p-4 shadow-lg rounded-4" style="width: 22rem;">
-            <h3 class="text-center mb-4">Inicio de sesión</h3>
-
-            <div class="mb-3">
-                <label class="form-label">Correo electrónico</label>
-                <input type="text" class="form-control" id="inputCorreo">
+        <div class="glass-card p-5 shadow-lg animate-zoom-in" style="width: 100%; max-width: 400px;">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Bienvenido</h2>
+                <p class="text-white-50">Ingresa a tu cuenta de MyHelp</p>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword">
-            </div>
+            <form>
+                <div class="mb-3">
+                    <label class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="inputCorreo" placeholder="ejemplo@correo.com">
+                </div>
 
-            <button id="btnInicioUsuario" class="btn btn-info w-100 fw-bold">
-                Entrar
-            </button>
+                <div class="mb-4">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="••••••••">
+                </div>
 
-            <a href="loginUsuario.html" class="btn btn-outline-light w-100 mt-3">
-                Crear cuenta
-            </a>
+                <button id="btnInicioUsuario" class="btn btn-blue-glass w-100 fw-bold mb-3">
+                    Entrar
+                </button>
+
+                <div class="text-center mt-3">
+                    <p class="mb-0 text-white-50 small">¿No tienes cuenta?</p>
+                    <a href="loginUsuario.html" class="text-accent fw-bold text-decoration-none">Regístrate aquí</a>
+                </div>
+            </form>
         </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-black text-center text-secondary py-3">
-        <p class="mb-0">© 2026 MiApp - Todos los derechos reservados</p>
+    <footer class="py-4 border-top border-white-10 mt-auto">
+        <div class="container text-center">
+            <p class="text-white-50 mb-0">© 2026 MyHelp App. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Tu JS -->
     <script src="../js/inicioSeccion.js"></script>
 </body>
-
 </html>

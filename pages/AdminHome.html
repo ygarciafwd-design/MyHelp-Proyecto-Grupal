@@ -4,44 +4,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrador - Becas</title>
+    <title>Panel Administrador - MyHelp</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5.3.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../Styles/global.css">
     <link rel="stylesheet" href="../Styles/admin.css">
 </head>
 
 <body>
-    <h1>Panel de Control de Becas</h1>
-    <p>Lista de solicitudes recibidas:</p>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Cédula</th>
-                <th>Tipo de Beca</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tablaSolicitudes">
-            <!-- Aquí el JS insertará las filas -->
-        </tbody>
-    </table>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="home.html">
+                <img src="../img/logo nuevo.png" alt="MyHelp Logo" class="navbar-logo me-2">
+                MyHelp Admin
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Ver Sitio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-logout px-3 ms-lg-3" href="home.html">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="container py-5">
+        <div class="row mb-5 animate-fade-in">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-2 text-black">Panel de Control</h1>
+                <p class="text-black opacity-75 fs-5">Gestión de solicitudes de becas y convenios institucionales.</p>
+            </div>
+        </div>
+
+        <div class="glass-card p-4 p-md-5 mb-5 animate-slide-up">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h3 fw-bold mb-0">Solicitudes Recibidas</h2>
+                <div class="badge bg-primary-glass px-3 py-2">Total: <span id="contadorSolicitudes">0</span></div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-custom align-middle">
+                    <thead>
+                        <tr>
+                            <th>Nombre Completo</th>
+                            <th>Cédula</th>
+                            <th>Tipo de Beca</th>
+                            <th>Estado</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaSolicitudes">
+                        <!-- Aquí el JS insertará las filas -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 
     <!-- Modal para ver todos los detalles -->
-    <div id="modalDetalles" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="btnCerrarModal">&times;</span>
-            <h2>Detalles de la Solicitud</h2>
-            <div id="contenidoDetalles">
+    <div id="modalDetalles" class="modal-glass">
+        <div class="modal-glass-content glass-card animate-zoom-in">
+            <div class="modal-glass-header">
+                <h2 class="h3 fw-bold mb-0">Detalles de la Solicitud</h2>
+                <span class="close-btn" id="btnCerrarModal">&times;</span>
+            </div>
+            <div id="contenidoDetalles" class="modal-glass-body py-4">
                 <!-- Se llenará con JS -->
+            </div>
+            <div class="modal-glass-footer text-end mt-4">
+                <button class="btn btn-secondary-glass"
+                    onclick="document.getElementById('modalDetalles').style.display='none'">Cerrar</button>
             </div>
         </div>
     </div>
 
-    <br>
-    <a href="home.html">Salir del Panel</a>
+    <!-- Footer -->
+    <footer class="py-4 mt-auto border-top border-white-10">
+        <div class="container text-center">
+            <p class="text-white-50 mb-0">&copy; 2026 MyHelp Admin. Gestión Profesional de Becas.</p>
+        </div>
+    </footer>
 
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/adminPagina.js"></script>
+    <script>
+        // Pequeño script para actualizar el contador si fuera necesario
+        document.addEventListener('DOMContentLoaded', () => {
+            const solicitudes = JSON.parse(localStorage.getItem("solicitudesBecas")) || [];
+            document.getElementById('contadorSolicitudes').innerText = solicitudes.length;
+        });
+    </script>
+
+<div id="modalEditar" class="modal-glass" style="display:none;">
+    <div class="modal-glass-content glass-card animate-zoom-in">
+        <div class="modal-glass-header">
+            <h2 class="h3 fw-bold mb-0">Editar Solicitud</h2>
+            <span class="close-btn" onclick="cerrarModalEditar()">&times;</span>
+        </div>
+        <div class="modal-glass-body py-4">
+            <form id="formEditar">
+                <input type="hidden" id="editIndex">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" id="editNombre" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Tipo de Beca</label>
+                        <select id="editTipoBeca" class="form-select">
+                            <option value="Socioeconómica">Socioeconómica</option>
+                            <option value="Excelencia Académica">Excelencia Académica</option>
+                            <option value="Deportiva">Deportiva</option>
+                            <option value="Cultural">Cultural</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Estado</label>
+                        <select id="editEstado" class="form-select">
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Aceptada">Aceptada</option>
+                            <option value="Rechazada">Rechazada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-end mt-4">
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModalEditar()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary-glass">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 </body>
+
 
 </html>
