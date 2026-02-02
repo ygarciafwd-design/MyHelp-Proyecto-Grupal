@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Beca</title>
+</head>
+
+<body>
+    <h1>Formulario de Solicitud de Beca</h1>
+
+    <div id="apartadoFormulario">
+        <h3>Datos Personales</h3>
+
+        <label>Nombre:</label><br>
+        <input type="text" id="becaNombre"><br>
+
+        <label>Apellido:</label><br>
+        <input type="text" id="becaApellido"><br>
+
+        <label>Cédula:</label><br>
+        <input type="text" id="becaCedula"><br>
+
+        <label>Correo Electrónico:</label><br>
+        <input type="email" id="becaCorreo"><br>
+
+        <label>Teléfono:</label><br>
+        <input type="text" id="becaTelefono"><br>
+
+        <label>Dirección:</label><br>
+        <input type="text" id="becaDireccion"><br>
+
+        <label>Fecha de Nacimiento:</label><br>
+        <input type="date" id="becaFechaNacimiento"><br>
+
+        <label>Tipo de Beca:</label><br>
+        <select id="becaTipo">
+            <option value="Socioeconómica">Socioeconómica</option>
+            <option value="Excelencia Académica">Excelencia Académica</option>
+            <option value="Deportiva">Deportiva</option>
+            <option value="Cultural">Cultural</option>
+        </select><br><br>
+
+        <button id="btnEnviarBeca">Enviar Solicitud</button>
+    </div>
+
+    <hr>
+    <h3>Mis Solicitudes</h3>
+    <div id="resultado">
+        <ul id="listaMisSolicitudes">
+            <!-- Aquí se mostrarán las solicitudes del usuario -->
+        </ul>
+    </div>
+
+    <br>
+    
+    <a href="home.html">Volver al Home</a>
+
+    <a href="../Pages/AdminHome.html">Administrador</a>
+    <script src="../js/usuarioIniciado.js"></script>
+</body>
+
+</html>

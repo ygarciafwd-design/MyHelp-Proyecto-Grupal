@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Becas</title>
+    <link rel="stylesheet" href="../Styles/admin.css">
+</head>
+
+<body>
+    <h1>Panel de Control de Becas</h1>
+    <p>Lista de solicitudes recibidas:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cédula</th>
+                <th>Tipo de Beca</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaSolicitudes">
+            <!-- Aquí el JS insertará las filas -->
+        </tbody>
+    </table>
+
+    <!-- Modal para ver todos los detalles -->
+    <div id="modalDetalles" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="btnCerrarModal">&times;</span>
+            <h2>Detalles de la Solicitud</h2>
+            <div id="contenidoDetalles">
+                <!-- Se llenará con JS -->
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <a href="home.html">Salir del Panel</a>
+
+    <script src="../js/adminPagina.js"></script>
+</body>
+
+</html>
