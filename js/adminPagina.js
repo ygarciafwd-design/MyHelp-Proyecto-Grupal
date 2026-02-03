@@ -1,12 +1,12 @@
 /**
- * ARCHIVO: adminPagina.js - Versión Optimizada
+ * ARCHIVO: adminPagina.js - Versión Optimizada con Edición
  */
 
 const tablaSolicitudes = document.getElementById("tablaSolicitudes");
 const modalDetalles = document.getElementById("modalDetalles");
 const contenidoDetalles = document.getElementById("contenidoDetalles");
 
-// Función para cargar y pintar la tabla
+// Función para cargar y pintar la tabla (Sin cambios en diseño/colores)
 function cargarSolicitudes() {
     tablaSolicitudes.innerHTML = "";
     const solicitudes = JSON.parse(localStorage.getItem("solicitudesBecas")) || [];
@@ -34,7 +34,7 @@ function cargarSolicitudes() {
     });
 }
 
-// Colores según el estado
+// Colores según el estado (Se mantiene tu lógica original)
 function getBadgeColor(estado) {
     switch (estado) {
         case 'Aceptada': return 'bg-success';
@@ -60,6 +60,41 @@ window.verDetalles = function(index) {
     document.getElementById('modalDetalles').style.display = 'block';
 };
 
+// --- NUEVA LÓGICA DE EDICIÓN (Conectada a AdminHome.html) ---
+
+window.abrirEditor = function(index) {
+    const solicitudes = JSON.parse(localStorage.getItem("solicitudesBecas")) || [];
+    const s = solicitudes[index];
+    
+    // Carga los datos en los IDs que ya tienes en el HTML
+    document.getElementById('editIndex').value = index;
+    document.getElementById('editNombre').value = s.nombre;
+    document.getElementById('editTipoBeca').value = s.tipoBeca;
+    document.getElementById('editEstado').value = s.estado;
+    
+    document.getElementById('modalEditar').style.display = 'block';
+};
+
+window.cerrarModalEditar = function() {
+    document.getElementById('modalEditar').style.display = 'none';
+};
+
+// Escuchador para procesar el formulario de edición
+document.getElementById('formEditar')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const index = document.getElementById('editIndex').value;
+    let solicitudes = JSON.parse(localStorage.getItem("solicitudesBecas")) || [];
+    
+    // Actualiza los valores respetando la estructura
+    solicitudes[index].nombre = document.getElementById('editNombre').value;
+    solicitudes[index].tipoBeca = document.getElementById('editTipoBeca').value;
+    solicitudes[index].estado = document.getElementById('editEstado').value;
+    
+    localStorage.setItem("solicitudesBecas", JSON.stringify(solicitudes));
+    cerrarModalEditar();
+    cargarSolicitudes();
+});
+
 // Eliminar solicitud
 window.eliminarSolicitud = function(index) {
     if (confirm("¿Seguro que quieres borrar esta solicitud?")) {
@@ -68,6 +103,12 @@ window.eliminarSolicitud = function(index) {
         localStorage.setItem("solicitudesBecas", JSON.stringify(solicitudes));
         cargarSolicitudes();
     }
+};
+
+// Cerrar modales al hacer clic fuera
+window.onclick = function(event) {
+    if (event.target == modalDetalles) modalDetalles.style.display = "none";
+    if (event.target == document.getElementById('modalEditar')) cerrarModalEditar();
 };
 
 // Inicializar

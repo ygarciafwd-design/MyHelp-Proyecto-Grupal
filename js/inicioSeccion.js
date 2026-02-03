@@ -9,53 +9,44 @@ const inputCorreo = document.getElementById("inputCorreo")
 const inputPassword = document.getElementById("inputPassword")
 const btnInicioUsuario = document.getElementById("btnInicioUsuario")
 
+// Base de datos de usuarios registrados
 let usuariosList = JSON.parse(localStorage.getItem("keyUsuarios")) || []
 
 btnInicioUsuario.addEventListener("click", function (e) {
     e.preventDefault()
 
+    // 1. Validar campos vacíos
     if (inputPassword.value === "" || inputCorreo.value === "") {
-        Swal.fire({
-            icon: "warning",
-            title: "Campos vacíos",
-            text: "Debes llenar el correo y la contraseña"
-        })
+        Swal.fire({ icon: "warning", title: "Campos vacíos", text: "Llena todo por favor" })
         return
     }
 
-    const CorreoDusuario = inputCorreo.value
-    const PasswordDusuario = inputPassword.value
-
-    let usuarioValido = usuariosList.find(
-        u => u.usuarioCorreo === CorreoDusuario
-    )
+    // 2. Buscar usuario
+    const usuarioValido = usuariosList.find(u => u.usuarioCorreo === inputCorreo.value)
 
     if (!usuarioValido) {
-        Swal.fire({
-            icon: "error",
-            title: "Usuario no encontrado",
-            text: "El correo ingresado no está registrado"
-        })
+        Swal.fire({ icon: "error", title: "Error", text: "Usuario no encontrado" })
         return
     }
-    else if (usuarioValido.usuarioPassword !== PasswordDusuario) {
-        Swal.fire({
-            icon: "error",
-            title: "Contraseña incorrecta",
-            text: "La contraseña ingresada no es válida"
-        })
+
+    // 3. Validar contraseña
+    if (usuarioValido.usuarioPassword !== inputPassword.value) {
+        Swal.fire({ icon: "error", title: "Error", text: "Contraseña incorrecta" })
         return
     }
-    else {
-        Swal.fire({
-            icon: "success",
-            title: "Inicio de sesión exitoso",
-            text: "Bienvenido 👋",
-            timer: 1500,
-            showConfirmButton: false
-        }).then(() => {
-            window.location.href = "../Pages/home.html"
-        })
-    }
+
+    // 4. ¡ÉXITO! -> GUARDAR SESIÓN (Esto es lo vital para que no te de error después)
+    // Guardamos al usuario actual en una 'caja' separada llamada usuarioActivo
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioValido));
+
+    Swal.fire({
+        icon: "success",
+        title: "¡Bienvenido!",
+        showConfirmButton: false,
+        timer: 1500
+    }).then(() => {
+        // Redirigir al Home o al Perfil
+        window.location.href = "home.html"; 
+    });
 })
 

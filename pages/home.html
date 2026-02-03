@@ -25,8 +25,6 @@
     <nav class="navbar navbar-expand-lg navbar-glass sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-bold" href="home.html">
-                <!-- LOGO: cambia esta imagen por la tuya -->
-                <!-- Debe estar en tu carpeta /img -->
                 <img src="../img/logo nuevo.png" alt="MyHelp Logo" class="navbar-logo me-2">
                 MyHelp
             </a>
@@ -37,18 +35,41 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="inicioSeccion.html">Inicio sesión </a></li>
-                    <li class="nav-item"><a class="nav-link" href="Becas.html">Becas</a></li>
-                    <li class="nav-item dropdown">
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Menú</a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="perfilUsuario.html">Mi Perfil</a></li>
-                            <li>                          
-                                <hr class="dropdown-divider">
 
+                    <!-- INICIO SESIÓN -->
+                    <li class="nav-item" id="loginItem">
+                        <a class="nav-link" id="linkLogin" href="inicioSeccion.html">Inicio sesión</a>
                     </li>
+
+                    <!-- BECAS -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="Becas.html">Becas</a>
+                    </li>
+
+                    <!-- MENÚ USUARIO -->
+                    <li class="nav-item dropdown d-none" id="menuUsuario">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <span id="nombreNavbar">Usuario</span>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="perfilUsuario.html">Mi Perfil</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <button class="dropdown-item text-danger" id="btnCerrarSesion">
+                                    Cerrar sesión
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
+
+
             </div>
         </div>
     </nav>
@@ -159,6 +180,9 @@
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/inicio.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/navbarUsuario.js"></script>
+
 </body>
 
 </html>

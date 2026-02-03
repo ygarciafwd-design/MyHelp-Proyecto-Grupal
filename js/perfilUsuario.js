@@ -3,60 +3,65 @@ const perfilNombre = document.getElementById("perfilNombre")
 const perfilCorreo = document.getElementById("perfilCorreo")
 const listaSolicitudes = document.getElementById("listaSolicitudes")
 
-// OBTENER USUARIO QUE INICIÓ SESIÓN
-const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"))
+// 1. Verificar si hay alguien logueado
+const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
 
-const navbarNombreUsuario = document.getElementById("navbarNombreUsuario")
-
+// Si NO hay usuario, lo mandamos al login INMEDIATAMENTE
 if (!usuarioActivo) {
-    window.location.href = "../Pages/login.html"
-}
-
-// Mostrar nombre en navbar
-navbarNombreUsuario.textContent = usuarioActivo.nombreUsuario
-
-
-// SI NO HAY USUARIO LOGUEADO, REDIRIGE AL LOGIN
-if (!usuarioActivo) {
-    window.location.href = "../Pages/login.html"
-}
-
-// MOSTRAR DATOS DEL PERFIL
-perfilNombre.textContent = usuarioActivo.nombreUsuario
-perfilCorreo.textContent = usuarioActivo.usuarioCorreo
-
-// OBTENER SOLICITUDES DE BECAS
-let solicitudesBecas = JSON.parse(localStorage.getItem("solicitudesBecas")) || []
-
-// FILTRAR SOLO LAS DEL USUARIO ACTUAL
-const solicitudesUsuario = solicitudesBecas.filter(
-    solicitud => solicitud.correo === usuarioActivo.usuarioCorreo
-)
-
-// MOSTRAR SOLICITUDES
-if (solicitudesUsuario.length === 0) {
-    listaSolicitudes.innerHTML = "<li>No has solicitado ninguna beca</li>"
+    alert("Debes iniciar sesión primero");
+    window.location.href = "inicioSeccion.html"; 
 } else {
-    solicitudesUsuario.forEach(solicitud => {
-        const li = document.createElement("li")
-        li.textContent = `${solicitud.beca} - Estado: ${solicitud.estado}`
-        listaSolicitudes.appendChild(li)
-    })
+    // Solo si existe el usuario, ejecutamos el resto del código
+    cargarDatosPerfil();
 }
 
+function cargarDatosPerfil() {
+    // Referencias a los elementos HTML
+    const perfilNombre = document.getElementById("perfilNombre");
+    const perfilCorreo = document.getElementById("perfilCorreo");
+    const listaSolicitudes = document.getElementById("listaSolicitudes");
 
-const btnCerrarSesion = document.getElementById("btnCerrarSesion")
+    // Llenar datos personales (usamos ?. para evitar errores si el elemento no existe)
+    if (perfilNombre) perfilNombre.textContent = usuarioActivo.nombreUsuario;
+    if (perfilCorreo) perfilCorreo.textContent = usuarioActivo.usuarioCorreo;
 
-btnCerrarSesion.addEventListener("click", () => {
-    localStorage.removeItem("usuarioActivo")
+    // Cargar Solicitudes
+    const todasLasSolicitudes = JSON.parse(localStorage.getItem("solicitudesBecas")) || [];
+    
+    // Filtramos para ver solo las mías (coincidencia por correo)
+    const misSolicitudes = todasLasSolicitudes.filter(s => s.correo === usuarioActivo.usuarioCorreo);
 
-    Swal.fire({
-        icon: "success",
-        title: "Sesión cerrada",
-        text: "Has salido correctamente",
-        timer: 1500,
-        showConfirmButton: false
-    }).then(() => {
-        window.location.href = "../Pages/login.html"
-    })
-})
+    if (listaSolicitudes) {
+        listaSolicitudes.innerHTML = ""; // Limpiar lista
+        
+        if (misSolicitudes.length === 0) {
+            listaSolicitudes.innerHTML = `<li class="list-group-item bg-transparent text-white-50">No tienes solicitudes aún.</li>`;
+        } else {
+            misSolicitudes.forEach(s => {
+                const li = document.createElement("li");
+                li.className = "list-group-item bg-transparent text-white d-flex justify-content-between align-items-center mb-2 border border-white-10 rounded";
+                li.innerHTML = `
+                    <div>
+                        <span class="fw-bold d-block">${s.tipoBeca}</span>
+                        <small class="text-white-50">${s.fecha || 'Fecha desconocida'}</small>
+                    </div>
+                    <span class="badge ${obtenerColorEstado(s.estado)}">${s.estado}</span>
+                `;
+                listaSolicitudes.appendChild(li);
+            });
+        }
+    }
+}
+
+// Función auxiliar para colores
+function obtenerColorEstado(estado) {
+    if (estado === 'Aceptada') return 'bg-success';
+    if (estado === 'Rechazada') return 'bg-danger';
+    return 'bg-warning text-dark';
+}
+
+// Botón Cerrar Sesión
+document.getElementById("btnCerrarSesion")?.addEventListener("click", () => {
+    localStorage.removeItem("usuarioActivo");
+    window.location.href = "inicioSeccion.html";
+});

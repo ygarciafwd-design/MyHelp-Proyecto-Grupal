@@ -1,3 +1,7 @@
+/**
+ * ARCHIVO: logicaFormularios.js - Versión Funcional con Cédula y Correo
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Obtener el tipo de beca de la URL (ej: formularios.html?tipo=Deportiva)
     const params = new URLSearchParams(window.location.search);
@@ -5,11 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const titulo = document.getElementById("tituloFormulario");
     const contenedorCampos = document.getElementById("camposEspecificos");
-    document.getElementById("tipoBecaSeleccionada").value = tipo;
+    
+    // Verificamos que el campo oculto exista antes de asignar valor
+    const inputTipo = document.getElementById("tipoBecaSeleccionada");
+    if (inputTipo) inputTipo.value = tipo;
 
-    titulo.innerText = `Solicitud de Beca ${tipo}`;
+    if (titulo) titulo.innerText = `Solicitud de Beca ${tipo}`;
 
-    // 2. Inyectar campos distintivos según el tipo
+    // 2. Inyectar campos distintivos según el tipo (Mantenemos tu diseño original)
     let htmlExtra = "";
     if (tipo === "Deportiva") {
         htmlExtra = `
@@ -30,18 +37,22 @@ document.addEventListener("DOMContentLoaded", () => {
             <label class="form-label mt-3">Institución de procedencia</label>
             <input type="text" id="detalles" class="form-control" required>`;
     }
-    contenedorCampos.innerHTML = htmlExtra;
+    
+    if (contenedorCampos) contenedorCampos.innerHTML = htmlExtra;
 });
 
-// 3. Guardar la información
-document.getElementById("formSolicitudDinamico").addEventListener("submit", (e) => {
+// 3. Guardar la información (ACTUALIZADO con Cédula y Correo)
+document.getElementById("formSolicitudDinamico")?.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    // Capturamos los nuevos campos que corregimos en Formulario.html
     const nuevaSolicitud = {
         id: Date.now(),
         nombre: document.getElementById("nombre").value,
+        cedula: document.getElementById("cedula").value,  // <-- Nuevo campo capturado
+        correo: document.getElementById("correo").value,  // <-- Nuevo campo capturado
         tipoBeca: document.getElementById("tipoBecaSeleccionada").value,
-        datoExtra: document.getElementById("extra").value, // Guardamos el campo distintivo
+        datoExtra: document.getElementById("extra").value, 
         detalles: document.getElementById("detalles").value,
         estado: "Pendiente",
         fecha: new Date().toLocaleDateString()
@@ -52,5 +63,5 @@ document.getElementById("formSolicitudDinamico").addEventListener("submit", (e) 
     localStorage.setItem("solicitudesBecas", JSON.stringify(solicitudes));
 
     alert("¡Solicitud enviada con éxito! El administrador la revisará pronto.");
-    window.location.href = "Becas.html";
+    window.location.href = "home.html"; // Redirigimos a home tras el éxito
 });
