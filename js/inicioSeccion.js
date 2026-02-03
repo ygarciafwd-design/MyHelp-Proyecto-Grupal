@@ -6,39 +6,56 @@ const mostrarNombre = document.getElementById("mostrarNombre")
 
 //
 const inputCorreo = document.getElementById("inputCorreo")
-const inputPassword = document.getElementById ("inputPassword")
+const inputPassword = document.getElementById("inputPassword")
 const btnInicioUsuario = document.getElementById("btnInicioUsuario")
 
-let usuariosList = JSON.parse(localStorage.getItem("keyUsuarios")) || [] //Llama el array 
+let usuariosList = JSON.parse(localStorage.getItem("keyUsuarios")) || []
 
-btnInicioUsuario.addEventListener("click",function(e){ // ESA E en la funcion es para que no recarge
-    e.preventDefault();
+btnInicioUsuario.addEventListener("click", function (e) {
+    e.preventDefault()
 
-    // recarga.preventDefault(); // evita que la pagina se recargue
-
-    if (inputPassword.value === "" || inputCorreo.value === ""){
-
-        alert ("Estan vacios, deben llenar los demas") //CAMBIOS 
-        return;
+    if (inputPassword.value === "" || inputCorreo.value === "") {
+        Swal.fire({
+            icon: "warning",
+            title: "Campos vacíos",
+            text: "Debes llenar el correo y la contraseña"
+        })
+        return
     }
 
-    const CorreoDusuario = inputCorreo.value; 
-    const PasswordDusuario = inputPassword.value;
+    const CorreoDusuario = inputCorreo.value
+    const PasswordDusuario = inputPassword.value
 
-    let usuarioValido = usuariosList.find(u => u.usuarioCorreo === CorreoDusuario);
+    let usuarioValido = usuariosList.find(
+        u => u.usuarioCorreo === CorreoDusuario
+    )
 
     if (!usuarioValido) {
-        alert ("No se encontro el Usuario mano")
-        return; 
-    }else if (usuarioValido.usuarioPassword !== PasswordDusuario){
-        alert ("Contraseña Incorrecta")
+        Swal.fire({
+            icon: "error",
+            title: "Usuario no encontrado",
+            text: "El correo ingresado no está registrado"
+        })
         return
-    }else{
-        alert("Exitoso")
-        window.location.href = "../Pages/usuarioIniciado.html";
     }
-
-
-
-
+    else if (usuarioValido.usuarioPassword !== PasswordDusuario) {
+        Swal.fire({
+            icon: "error",
+            title: "Contraseña incorrecta",
+            text: "La contraseña ingresada no es válida"
+        })
+        return
+    }
+    else {
+        Swal.fire({
+            icon: "success",
+            title: "Inicio de sesión exitoso",
+            text: "Bienvenido 👋",
+            timer: 1500,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = "../Pages/usuarioIniciado.html"
+        })
+    }
 })
+

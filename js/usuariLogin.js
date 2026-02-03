@@ -6,10 +6,35 @@ const mostrarNombre = document.getElementById("mostrarNombre")
 
 let usuariosList = JSON.parse(localStorage.getItem("keyUsuarios")) || []
 
-usuarioBtnGuardar.addEventListener("click", function () {
+usuarioBtnGuardar.addEventListener("click", function (event) {
+  event.preventDefault() // ← IMPORTANTE para que el botón funcione bien
 
   if (nombreUsuario.value === "" || usuarioPassword.value === "" || usuarioCorreo.value === "") {
-    alert("Están vacíos, deben llenar todos")
+    Swal.fire({
+      icon: "warning",
+      title: "Campos vacíos",
+      text: "Debes llenar todos los espacios"
+    })
+    return
+  }
+
+  // 🔹 VALIDACIÓN DEL @
+  if (!usuarioCorreo.value.includes("@")) {
+    Swal.fire({
+      icon: "error",
+      title: "Correo inválido",
+      text: "El correo debe contener un @"
+    })
+    return
+  }
+
+  // 🔹 VALIDACIÓN DE CONTRASEÑA DÉBIL
+  if (usuarioPassword.value.length < 6) {
+    Swal.fire({
+      icon: "info",
+      title: "Contraseña muy débil",
+      text: "La contraseña debe tener al menos 6 caracteres"
+    })
     return
   }
 
@@ -17,7 +42,6 @@ usuarioBtnGuardar.addEventListener("click", function () {
     nombreUsuario: nombreUsuario.value,
     usuarioCorreo: usuarioCorreo.value,
     usuarioPassword: usuarioPassword.value
-    
   }
 
   usuariosList.push(usuario)
@@ -27,7 +51,7 @@ usuarioBtnGuardar.addEventListener("click", function () {
   usuarioCorreo.value = ""
   usuarioPassword.value = ""
 
-  usuarioNombre() // mostrar actualizados
+  usuarioNombre()
 })
 
 function usuarioNombre() {
@@ -40,7 +64,8 @@ function usuarioNombre() {
   })
 }
 
-usuarioNombre() // mostrar al cargar la página
+usuarioNombre()
+
 
 
 
