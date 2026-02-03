@@ -129,14 +129,20 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
+    overflow-y: auto;
+    padding: 20px;
 }
 
 .modal-glass-content {
-    margin: 5% auto;
-    width: 90%;
-    max-width: 600px;
+    margin: auto;
+    width: 95%;
+    max-width: 900px;
+    max-height: 90vh;
     position: relative;
-    padding: 30px !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    animation: zoomIn 0.3s ease-out;
 }
 
 .modal-glass-header {
@@ -144,8 +150,40 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding-bottom: 20px;
+    padding: 1.5rem;
     color: #000;
+    flex-shrink: 0;
+}
+
+.modal-glass-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(90vh - 180px);
+    flex-grow: 1;
+}
+
+.modal-glass-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-glass-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.modal-glass-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.modal-glass-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-glass-footer {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 .close-btn {
@@ -169,6 +207,24 @@ body {
 .modal-glass-body strong {
     color: #333;
     margin-right: 10px;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .modal-glass-content {
+        width: 98%;
+        max-height: 95vh;
+    }
+
+    .modal-glass-body {
+        max-height: calc(95vh - 160px);
+    }
+
+    .modal-glass-header,
+    .modal-glass-body,
+    .modal-glass-footer {
+        padding: 1rem;
+    }
 }
 
 /* Animaciones */

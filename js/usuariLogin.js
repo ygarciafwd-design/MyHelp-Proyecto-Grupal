@@ -2,7 +2,6 @@ const nombreUsuario = document.getElementById("nombreUsuario")
 const usuarioCorreo = document.getElementById("usuarioCorreo")
 const usuarioPassword = document.getElementById("usuarioPassword")
 const usuarioBtnGuardar = document.getElementById("usuarioBtnGuardar")
-const mostrarNombre = document.getElementById("mostrarNombre")
 
 let usuariosList = JSON.parse(localStorage.getItem("keyUsuarios")) || []
 
@@ -51,26 +50,17 @@ usuarioBtnGuardar.addEventListener("click", function (event) {
   usuarioCorreo.value = ""
   usuarioPassword.value = ""
 
-  usuarioNombre()
-
-  // ✅ CONFIRMACIÓN DE REGISTRO (LO ACORDADO)
+  // ✅ CONFIRMACIÓN DE REGISTRO Y REDIRECCIÓN
   Swal.fire({
     icon: "success",
     title: "Registro exitoso",
-    text: "Tu cuenta fue creada correctamente",
-    timer: 1500,
+    text: "Tu cuenta fue creada correctamente. Serás redirigido al formulario de becas.",
+    timer: 2000,
     showConfirmButton: false
+  }).then(() => {
+    // Guardar sesión del usuario recién registrado
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
+    // Redirigir al formulario de becas
+    window.location.href = "Becas.html";
   })
 })
-
-function usuarioNombre() {
-  mostrarNombre.innerHTML = ""
-
-  usuariosList.forEach((usuario) => {
-    const p = document.createElement("p")
-    p.textContent = usuario.nombreUsuario
-    mostrarNombre.appendChild(p)
-  })
-}
-
-  usuarioNombre()

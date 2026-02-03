@@ -67,6 +67,7 @@
                             <th>Cédula</th>
                             <th>Tipo de Beca</th>
                             <th>Estado</th>
+                            <th>Fecha</th>
                             <th class="text-end">Acciones</th>
                         </tr>
                     </thead>
@@ -104,6 +105,7 @@
 
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/adminPagina.js"></script>
     <script>
         // Pequeño script para actualizar el contador si fuera necesario
@@ -113,46 +115,46 @@
         });
     </script>
 
-<div id="modalEditar" class="modal-glass" style="display:none;">
-    <div class="modal-glass-content glass-card animate-zoom-in">
-        <div class="modal-glass-header">
-            <h2 class="h3 fw-bold mb-0">Editar Solicitud</h2>
-            <span class="close-btn" onclick="cerrarModalEditar()">&times;</span>
-        </div>
-        <div class="modal-glass-body py-4">
-            <form id="formEditar">
-                <input type="hidden" id="editIndex">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" id="editNombre" class="form-control">
+    <div id="modalEditar" class="modal-glass" style="display:none;">
+        <div class="modal-glass-content glass-card animate-zoom-in">
+            <div class="modal-glass-header">
+                <h2 class="h3 fw-bold mb-0">Editar Solicitud</h2>
+                <span class="close-btn" onclick="cerrarModalEditar()">&times;</span>
+            </div>
+            <div class="modal-glass-body py-4">
+                <form id="formEditar">
+                    <input type="hidden" id="editIndex">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" id="editNombre" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tipo de Beca</label>
+                            <select id="editTipoBeca" class="form-select">
+                                <option value="Socioeconómica">Socioeconómica</option>
+                                <option value="Excelencia Académica">Excelencia Académica</option>
+                                <option value="Deportiva">Deportiva</option>
+                                <option value="Cultural">Cultural</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Estado</label>
+                            <select id="editEstado" class="form-select">
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Aceptada">Aceptada</option>
+                                <option value="Rechazada">Rechazada</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Tipo de Beca</label>
-                        <select id="editTipoBeca" class="form-select">
-                            <option value="Socioeconómica">Socioeconómica</option>
-                            <option value="Excelencia Académica">Excelencia Académica</option>
-                            <option value="Deportiva">Deportiva</option>
-                            <option value="Cultural">Cultural</option>
-                        </select>
+                    <div class="text-end mt-4">
+                        <button type="button" class="btn btn-secondary" onclick="cerrarModalEditar()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary-glass">Guardar Cambios</button>
                     </div>
-                    <div class="col-md-12">
-                        <label class="form-label">Estado</label>
-                        <select id="editEstado" class="form-select">
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="Aceptada">Aceptada</option>
-                            <option value="Rechazada">Rechazada</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="text-end mt-4">
-                    <button type="button" class="btn btn-secondary" onclick="cerrarModalEditar()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary-glass">Guardar Cambios</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 
 
