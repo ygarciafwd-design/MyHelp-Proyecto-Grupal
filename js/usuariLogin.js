@@ -52,6 +52,15 @@ usuarioBtnGuardar.addEventListener("click", function (event) {
   usuarioPassword.value = ""
 
   usuarioNombre()
+
+  // ✅ CONFIRMACIÓN DE REGISTRO (LO ACORDADO)
+  Swal.fire({
+    icon: "success",
+    title: "Registro exitoso",
+    text: "Tu cuenta fue creada correctamente",
+    timer: 1500,
+    showConfirmButton: false
+  })
 })
 
 function usuarioNombre() {
@@ -64,28 +73,4 @@ function usuarioNombre() {
   })
 }
 
-usuarioNombre()
-
-
-
-
-
-
-
-
-// function mostrarNmUsuario (){
-
-//     usuarioNombre.innerHTML = ""
-
-//     for (let index = 0; index< usuariosList.lenght; index++ ){ //
-//         let h1 = document.createElement("h1")
-//         h1.textContent = usuariosList[index]
-//         usuarioNombre.appendChild(h1)
-
-//     } //SI ESTA MAL ES AQUI
-
-
-// }
-
-// mostrarNmUsuario () //LA PARTE DE HTML TMB 
-
+  usuarioNombre()

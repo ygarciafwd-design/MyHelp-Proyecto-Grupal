@@ -54,7 +54,7 @@ btnInicioUsuario.addEventListener("click", function (e) {
             timer: 1500,
             showConfirmButton: false
         }).then(() => {
-            window.location.href = "../Pages/usuarioIniciado.html"
+            window.location.href = "../Pages/home.html"
         })
     }
 })
